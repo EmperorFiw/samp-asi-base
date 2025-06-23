@@ -29,7 +29,7 @@ void MainThread()
 		if (GetAsyncKeyState(VK_F3) & 1) // F3 
 		{
 			bool* bInfiniteRun = (bool*)0xB7CEE4;
-			if (*bInfiniteRun)
+			if (!*bInfiniteRun)
 			{
 				*(BYTE*)0x969170 = 1;
 
