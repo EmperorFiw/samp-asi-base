@@ -2,6 +2,7 @@
 #include "main.h"
 
 HANDLE g_DllHandle;
+DWORD g_SAMP = NULL;
 
 void WriteLog(const char* message)
 {
@@ -15,6 +16,12 @@ void WriteLog(const char* message)
 
 void MainThread()
 {
+	while (g_SAMP == NULL)
+	{
+		g_SAMP = (DWORD)GetModuleHandle("samp.dll");
+		Sleep(1000);
+	}
+
 	WriteLog("ASI Loaded.");
 	while (true)
 	{
@@ -30,6 +37,7 @@ void MainThread()
 			}
 			else
 			{
+				*(BYTE*)0x969170 = 0;
 				WriteLog("Infinite Run Deactivated.");
 			}
 		}
